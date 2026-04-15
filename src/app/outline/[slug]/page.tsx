@@ -4,7 +4,8 @@ import type { Metadata } from "next";
 import { OutlineRenderer } from "@/components/OutlineRenderer";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { FeedbackForm } from "@/components/FeedbackForm";
-import { outlines, getOutlineBySlug, getOutlineStats } from "@/data/outlines";
+import { ListeviousRatingCard } from "@/components/ListeviousRating";
+import { outlines, getOutlineBySlug, getOutlineStats, getListeviousRating } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
 
 export function generateStaticParams() {
@@ -36,6 +37,7 @@ export default async function OutlinePage({
 
   const contributor = getFounder(outline.contributorId);
   const stats = getOutlineStats(outline);
+  const rating = getListeviousRating(outline);
 
   // Find the duplicate if this outline has one
   const duplicate = outline.duplicateOf
@@ -142,6 +144,11 @@ export default async function OutlinePage({
           </p>
         </div>
       )}
+
+      {/* Listevious Rating */}
+      <div className="mt-8">
+        <ListeviousRatingCard {...rating} />
+      </div>
 
       {/* Feedback Form */}
       <div className="mt-10">

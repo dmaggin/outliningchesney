@@ -13,6 +13,7 @@ export interface Outline {
   editorialNote?: string;
   isDuplicate?: boolean;
   duplicateOf?: string;
+  lyricWordCount: number; // approximate word count of the full song lyrics
   content: OutlineNode[];
 }
 
@@ -24,6 +25,7 @@ export const outlines: Outline[] = [
     contributorId: "MJM",
     date: "2010-07-15",
     isChesney: true,
+    lyricWordCount: 270,
     content: [
       {
         text: "In the town where I was raised...",
@@ -75,6 +77,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-15",
     isChesney: true,
+    lyricWordCount: 350,
     content: [
       {
         text: "I",
@@ -136,6 +139,7 @@ export const outlines: Outline[] = [
     contributorId: "MJM",
     date: "2010-07-15",
     isChesney: true,
+    lyricWordCount: 300,
     content: [
       {
         text: "We had a...",
@@ -199,6 +203,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-15",
     isChesney: true,
+    lyricWordCount: 280,
     content: [
       {
         text: "My body",
@@ -261,6 +266,7 @@ export const outlines: Outline[] = [
     contributorId: "MJM",
     date: "2010-07-15",
     isChesney: true,
+    lyricWordCount: 250,
     content: [
       {
         text: "I've been",
@@ -327,6 +333,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-17",
     isChesney: true,
+    lyricWordCount: 320,
     content: [
       {
         text: '"Jack and Diane"',
@@ -434,6 +441,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2013-05-23",
     isChesney: true,
+    lyricWordCount: 290,
     editorialNote:
       'Dan called this "the listeous of all cheznwazzle songs, which is saying a lot. Also, it should be noted that the way the vocals in the song are done, the song sounds like a laundry list of ideas. Very listevious."',
     content: [
@@ -503,6 +511,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-17",
     isChesney: false,
+    lyricWordCount: 160,
     editorialNote:
       'Dan acknowledged "that last one didn\'t work as well as I thought it might." Then Ben ALSO outlined Paint It Black months later without realizing Dan had already done it. Dan noticed 18 months later: "Did BDM outline the Stones song not realizing I had already outlined that same song?" Ben replied: "ww appurrently i did."',
     isDuplicate: true,
@@ -570,6 +579,7 @@ export const outlines: Outline[] = [
     contributorId: "BDM",
     date: "2010-09-04",
     isChesney: false,
+    lyricWordCount: 160,
     editorialNote:
       "The duplicate! Ben independently outlined the same song two months later without realizing Dan had already done it. Great minds think alike.",
     isDuplicate: true,
@@ -651,6 +661,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-17",
     isChesney: false,
+    lyricWordCount: 220,
     editorialNote:
       'Dan prefaced this with "I also looked into doing some weird al songs and they didn\'t seem to work either for the most part. I think this one might be ok." The outline is long and repetitive (lots of "eat it" lines) — which itself is the joke.',
     content: [
@@ -775,6 +786,7 @@ export const outlines: Outline[] = [
     contributorId: "MJM",
     date: "2010-07-17",
     isChesney: false,
+    lyricWordCount: 230,
     editorialNote:
       'Matt\'s attempt at a non-Chesney outline. He commented afterward: "It\'s really true that nothing works quite like a Chesney song (or runs like a Deere)."',
     content: [
@@ -822,6 +834,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-17",
     isChesney: false,
+    lyricWordCount: 200,
     editorialNote:
       'Dan called this "probably one of the more outlinable REM songs" and noted it would be "interesting to note the average length of various outlines."',
     content: [
@@ -928,6 +941,7 @@ export const outlines: Outline[] = [
     contributorId: "DMM",
     date: "2010-07-17",
     isChesney: false,
+    lyricWordCount: 290,
     content: [
       {
         text: "I am more country than",
@@ -1032,6 +1046,105 @@ function maxDepth(nodes: OutlineNode[], depth = 1): number {
     }
   }
   return max;
+}
+
+// Count total words across all bullets
+function countOutlineWords(nodes: OutlineNode[]): number {
+  let count = 0;
+  for (const node of nodes) {
+    count += node.text.split(/\s+/).filter(Boolean).length;
+    if (node.children) {
+      count += countOutlineWords(node.children);
+    }
+  }
+  return count;
+}
+
+// Average words per bullet — lower = punchier = more outlineable
+function avgWordsPerBullet(nodes: OutlineNode[]): number {
+  const total = countNodes(nodes);
+  const words = countOutlineWords(nodes);
+  return total > 0 ? words / total : 0;
+}
+
+// Count how many nodes have children (branching nodes)
+function countBranchingNodes(nodes: OutlineNode[]): number {
+  let count = 0;
+  for (const node of nodes) {
+    if (node.children && node.children.length > 0) {
+      count += 1;
+      count += countBranchingNodes(node.children);
+    }
+  }
+  return count;
+}
+
+/**
+ * Listevious Rating — how outlineable is this song?
+ *
+ * Three components (each scored 0-10, then averaged):
+ *
+ * 1. BREVITY — how punchy are the bullets?
+ *    Fewer avg words per bullet = higher score.
+ *    1 word avg = 10, 8+ words avg = 1
+ *
+ * 2. STRUCTURE — how well does it nest?
+ *    Combines nesting depth + branching ratio.
+ *    Deep nesting with many branching nodes = high score.
+ *
+ * 3. DENSITY — how many bullets per lyric word?
+ *    More bullets relative to song length = more list-like.
+ *    Songs that ARE lists have high density.
+ */
+export function getListeviousRating(outline: Outline): {
+  score: number;       // 0-10 composite
+  brevity: number;     // 0-10
+  structure: number;   // 0-10
+  density: number;     // 0-10
+  label: string;
+} {
+  const bullets = countNodes(outline.content);
+  const depth = maxDepth(outline.content);
+  const avgWpb = avgWordsPerBullet(outline.content);
+  const branching = countBranchingNodes(outline.content);
+  const branchRatio = bullets > 0 ? branching / bullets : 0;
+
+  // Brevity: avg words per bullet. 1-2 words = 10, 7+ = 2
+  const brevity = Math.max(1, Math.min(10,
+    10 - ((avgWpb - 1.5) * 1.3)
+  ));
+
+  // Structure: depth (1-4 mapped to 2-8) + branching ratio bonus (0-2)
+  const depthScore = Math.min(8, (depth - 1) * 2.5 + 2);
+  const branchBonus = Math.min(2, branchRatio * 6);
+  const structure = Math.max(1, Math.min(10, depthScore + branchBonus));
+
+  // Density: bullets per lyric word. Higher = more list-like
+  const bulletsPerWord = outline.lyricWordCount > 0
+    ? bullets / outline.lyricWordCount
+    : 0;
+  // 0.10 bullets/word = ~7, 0.15+ = 10, 0.04 = 2
+  const density = Math.max(1, Math.min(10,
+    bulletsPerWord * 65
+  ));
+
+  const score = Math.round(((brevity + structure + density) / 3) * 10) / 10;
+
+  let label: string;
+  if (score >= 8.5) label = "Extremely Listevious";
+  else if (score >= 7) label = "Very Listevious";
+  else if (score >= 5.5) label = "Moderately Listevious";
+  else if (score >= 4) label = "Somewhat Listevious";
+  else if (score >= 2.5) label = "Barely Listevious";
+  else label = "Un-Listevious";
+
+  return {
+    score: Math.round(score * 10) / 10,
+    brevity: Math.round(brevity * 10) / 10,
+    structure: Math.round(structure * 10) / 10,
+    density: Math.round(density * 10) / 10,
+    label,
+  };
 }
 
 export function getOutlineStats(outline: Outline) {

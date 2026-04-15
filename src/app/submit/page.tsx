@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { OutlineEditor } from "@/components/OutlineEditor";
 
 export default function SubmitPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -117,20 +118,10 @@ export default function SubmitPage() {
 
         {/* Outline */}
         <div>
-          <label htmlFor="outline" className="block text-sm font-medium text-charcoal mb-1">
+          <label className="block text-sm font-medium text-charcoal mb-1">
             The outline
           </label>
-          <p className="text-xs text-charcoal-light/60 mb-2">
-            Use indentation (spaces or tabs) to show hierarchy. The structure IS the content.
-          </p>
-          <textarea
-            id="outline"
-            name="outline"
-            required
-            rows={14}
-            placeholder={`I've been\n  Up to my neck\n  Working 6 days a week\n  Wearin holes in the soles of the shoes of my feet\n[Chorus] No\n  shoes\n  shirt\n  problems`}
-            className="w-full px-4 py-3 bg-white/90 border border-ocean/15 rounded-xl text-sm font-mono text-charcoal placeholder:text-charcoal-light/30 focus:outline-none focus:ring-2 focus:ring-ocean/30 resize-y"
-          />
+          <OutlineEditor name="outline" required />
         </div>
 
         {/* Notes */}

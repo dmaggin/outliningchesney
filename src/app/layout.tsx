@@ -30,7 +30,12 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className="min-h-full flex flex-col bg-sky text-charcoal">
+      <body className="min-h-full flex flex-col text-charcoal">
+        {/* Fixed sky + ocean scene — stays centered while content scrolls */}
+        <div className="scene-bg" aria-hidden="true" />
+        <div className="scene-caustics" aria-hidden="true" />
+        <div className="scene-waves" aria-hidden="true" />
+
         {/* Hidden forms for Netlify Forms detection */}
         <form name="outline-submission" data-netlify="true" netlify-honeypot="bot-field" hidden>
           <input name="form-name" type="hidden" value="outline-submission" />

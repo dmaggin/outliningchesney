@@ -2,33 +2,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Caribbean turquoise — the dominant Chesney color */
   --color-ocean: #0AB4C7;
   --color-ocean-dark: #0899A8;
   --color-ocean-light: #5CD6E4;
   --color-ocean-deep: #007C8A;
 
-  /* Warm straw/sand — like the hat, the beach */
   --color-sand: #D4A853;
   --color-sand-light: #F5E6C8;
   --color-sand-warm: #C4943F;
   --color-sand-pale: #FFF4E0;
 
-  /* Sun-bleached warm tones */
   --color-sunset: #E8853A;
   --color-sunset-dark: #D0742E;
   --color-coral: #E07A5F;
 
-  /* Sky */
   --color-sky: #D9F0F7;
   --color-sky-bright: #B8E4F0;
   --color-seafoam: #A8E6D9;
 
-  /* Text */
   --color-charcoal: #2C3E50;
   --color-charcoal-light: #546E7A;
 
-  /* Surfaces */
   --color-cream: #FFFCF5;
 
   --font-sans: 'Outfit', system-ui, sans-serif;
@@ -37,75 +31,102 @@
 }
 
 :root {
-  --background: #D9F0F7;
+  --background: transparent;
   --foreground: #2C3E50;
 }
 
 body {
-  background: var(--background);
+  background: transparent;
   color: var(--foreground);
   font-family: var(--font-sans);
-  position: relative;
 }
 
-/* Ocean water background — shallow Caribbean water look */
-body::before {
-  content: '';
+/* ===== FIXED SKY + OCEAN SCENE ===== */
+/* This stays pinned to the viewport — content scrolls over it */
+
+.scene-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background:
-    /* Sunlight caustics on water */
-    radial-gradient(ellipse 700px 250px at 15% 25%, rgba(168, 230, 217, 0.4) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 300px at 80% 55%, rgba(10, 180, 199, 0.1) 0%, transparent 70%),
-    radial-gradient(ellipse 900px 350px at 45% 85%, rgba(168, 230, 217, 0.25) 0%, transparent 70%),
-    radial-gradient(ellipse 400px 200px at 65% 15%, rgba(255, 244, 224, 0.3) 0%, transparent 60%),
-    /* Base — clear shallow tropical water */
+    /* Sun glow near horizon */
+    radial-gradient(ellipse 70% 20% at 50% 42%, rgba(255, 244, 224, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 15% at 50% 44%, rgba(255, 209, 102, 0.2) 0%, transparent 70%),
+    /* Sky — warm pale blue fading to golden haze at horizon */
     linear-gradient(
       180deg,
-      #D9F0F7 0%,
-      #CCEDF5 20%,
-      #BFE8F2 40%,
-      #CCEDF5 60%,
-      #D9F0F7 80%,
-      #CCEDF5 100%
+      #A8DCF0 0%,
+      #BDE4F2 15%,
+      #D0ECF5 28%,
+      #E8F1E8 36%,
+      #FFF4E0 42%,
+      /* Horizon line — warm golden */
+      #F5E6C8 44%,
+      #EDD9AE 46%,
+      /* Water starts */
+      #8CD4DB 48%,
+      #5CC4D2 52%,
+      #3BBAC9 58%,
+      #0AB4C7 65%,
+      #0899A8 75%,
+      #0AB4C7 85%,
+      #3BBAC9 95%,
+      #5CC4D2 100%
     );
 }
 
-/* Subtle light refraction lines on water */
+/* Animated light ripples on the water portion */
 @keyframes wave-drift {
-  0% { background-position: 0% 50%, 100% 50%; }
-  50% { background-position: 100% 50%, 0% 50%; }
-  100% { background-position: 0% 50%, 100% 50%; }
+  0% { background-position: 0% 0%, 100% 0%; }
+  50% { background-position: 100% 0%, 0% 0%; }
+  100% { background-position: 0% 0%, 100% 0%; }
 }
 
-body::after {
-  content: '';
+.scene-waves {
   position: fixed;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 46%;
+  bottom: 0;
   z-index: -1;
-  opacity: 0.25;
+  opacity: 0.2;
   background:
     repeating-linear-gradient(
-      100deg,
+      95deg,
       transparent,
-      transparent 50px,
-      rgba(255, 255, 255, 0.35) 50px,
-      rgba(255, 255, 255, 0.35) 52px,
-      transparent 52px,
-      transparent 100px
+      transparent 60px,
+      rgba(255, 255, 255, 0.4) 60px,
+      rgba(255, 255, 255, 0.4) 62px,
+      transparent 62px,
+      transparent 120px
     ),
     repeating-linear-gradient(
-      80deg,
+      85deg,
       transparent,
-      transparent 70px,
-      rgba(255, 255, 255, 0.2) 70px,
-      rgba(255, 255, 255, 0.2) 72px,
-      transparent 72px,
-      transparent 140px
+      transparent 80px,
+      rgba(255, 255, 255, 0.25) 80px,
+      rgba(255, 255, 255, 0.25) 82px,
+      transparent 82px,
+      transparent 160px
     );
-  animation: wave-drift 35s ease-in-out infinite;
+  animation: wave-drift 30s ease-in-out infinite;
 }
+
+/* Soft caustic light patches on water */
+.scene-caustics {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 46%;
+  bottom: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 500px 200px at 15% 30%, rgba(168, 230, 217, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 250px at 75% 60%, rgba(92, 214, 228, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 45% 80%, rgba(168, 230, 217, 0.2) 0%, transparent 70%);
+}
+
+/* ===== CONTENT STYLES ===== */
 
 /* Outline content styling */
 .outline-content {
@@ -148,22 +169,12 @@ body::after {
   height: 4px;
 }
 
-/* Hero — sky above, warm sand below, like looking at the beach from the water */
+/* Hero — no opaque background, just a subtle warm overlay so text is readable */
 .sand-texture {
   background:
-    /* Sun glow top center */
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 244, 224, 0.8) 0%, transparent 60%),
-    /* Warm sand tones */
-    radial-gradient(ellipse 100% 70% at 50% 110%, rgba(212, 168, 83, 0.25) 0%, transparent 60%),
-    linear-gradient(
-      180deg,
-      #FFF8EC 0%,
-      #FCEFD5 15%,
-      #F5E6C8 35%,
-      #EDD9AE 55%,
-      #E4CC96 75%,
-      #D9F0F7 100%
-    );
+    radial-gradient(ellipse 80% 60% at 50% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 100%);
+  backdrop-filter: blur(2px);
 }
 
 /* Badge styles */
@@ -207,23 +218,10 @@ body::after {
 
 .outline-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(10, 180, 199, 0.2), 0 4px 10px -5px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 25px -5px rgba(10, 180, 199, 0.25), 0 4px 10px -5px rgba(0, 0, 0, 0.08);
 }
 
-/* Wave divider — sand to water transition */
+/* Wave divider — no longer needed since scene is continuous, but keep as subtle decorative element */
 .wave-divider {
-  position: relative;
-  height: 50px;
-  overflow: hidden;
-}
-
-.wave-divider::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: -5%;
-  width: 110%;
-  height: 100%;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 50'%3E%3Cpath d='M0,25 C150,40 350,10 600,25 C850,40 1050,10 1200,25 L1200,50 L0,50 Z' fill='%23D9F0F7'/%3E%3C/svg%3E") repeat-x;
-  background-size: 1200px 50px;
+  height: 0;
 }

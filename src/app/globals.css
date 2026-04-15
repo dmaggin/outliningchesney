@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --color-sunset: #FF6B35;
+  --color-sunset-dark: #E85D2A;
+  --color-ocean: #00B4D8;
+  --color-ocean-dark: #0096B7;
+  --color-sand: #FFD166;
+  --color-sand-light: #FFF8F0;
+  --color-charcoal: #2D3748;
+  --color-charcoal-light: #4A5568;
+  --color-cream: #FFFDF7;
+  --color-coral: #FF8C69;
+  --color-lime: #A8E06C;
+  --color-pink: #FF6B9D;
+
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Playfair Display', Georgia, serif;
+}
+
+:root {
+  --background: #FFFDF7;
+  --foreground: #2D3748;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Outline content styling — monospace for that academic humor */
+.outline-content {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.outline-node {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.outline-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-ocean);
+}
+
+.outline-node .outline-node::before {
+  background-color: var(--color-sunset);
+  width: 5px;
+  height: 5px;
+}
+
+.outline-node .outline-node .outline-node::before {
+  background-color: var(--color-sand);
+  width: 4px;
+  height: 4px;
+}
+
+.outline-node .outline-node .outline-node .outline-node::before {
+  background-color: var(--color-coral);
+  width: 4px;
+  height: 4px;
+}
+
+/* Subtle sand texture on hero */
+.sand-texture {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 209, 102, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 180, 216, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+}
+
+/* Gradient for hero */
+.sunset-gradient {
+  background: linear-gradient(
+    135deg,
+    #FF6B35 0%,
+    #FF8C69 25%,
+    #FFD166 50%,
+    #00B4D8 75%,
+    #0096B7 100%
+  );
+}
+
+/* Badge styles */
+.badge-founder {
+  background: linear-gradient(135deg, #FFD166, #FF6B35);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.badge-visiting {
+  background: linear-gradient(135deg, #E2E8F0, #CBD5E0);
+  color: #4A5568;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.badge-duplicate {
+  background: linear-gradient(135deg, #00B4D8, #0096B7);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+}
+
+/* Card hover effect */
+.outline-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.outline-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(255, 107, 53, 0.15), 0 4px 10px -5px rgba(0, 0, 0, 0.08);
+}

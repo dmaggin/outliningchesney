@@ -1150,8 +1150,16 @@ export function getListeviousRating(outline: Outline): {
     wordsPerBullet * 0.65
   ));
 
-  // Weighted average: simplicity and compression matter most
-  const score = (brevity * 0.30 + simplicity * 0.35 + compression * 0.35);
+  // Apply Chesney multiplier: Chesney songs get a 1.2x boost,
+  // non-Chesney songs get a 1/1.2 penalty. The thesis is that
+  // Chesney songs are inherently more outlineable.
+  const multiplier = outline.isChesney ? 1.2 : (1 / 1.2);
+
+  const adjBrevity = Math.min(10, brevity > 0 ? brevity * multiplier : 0);
+  const adjSimplicity = Math.min(10, simplicity > 0 ? simplicity * multiplier : 0);
+  const adjCompression = Math.min(10, compression > 0 ? compression * multiplier : 0);
+
+  const score = (adjBrevity * 0.30 + adjSimplicity * 0.35 + adjCompression * 0.35);
 
   let label: string;
   if (score >= 8) label = "Extremely Listevious";
@@ -1162,10 +1170,10 @@ export function getListeviousRating(outline: Outline): {
   else label = "Un-Listevious";
 
   return {
-    score: Math.round(score * 10) / 10,
-    brevity: Math.round(brevity * 10) / 10,
-    simplicity: Math.round(simplicity * 10) / 10,
-    compression: Math.round(compression * 10) / 10,
+    score: Math.round(Math.min(10, score) * 10) / 10,
+    brevity: Math.round(adjBrevity * 10) / 10,
+    simplicity: Math.round(adjSimplicity * 10) / 10,
+    compression: Math.round(adjCompression * 10) / 10,
     label,
   };
 }

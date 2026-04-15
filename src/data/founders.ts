@@ -25,15 +25,15 @@ export const founders: Founder[] = [
     note: "Proposed creating the website. Duplicate outliner.",
   },
   {
-    id: "EDS",
-    username: "EDS",
-    displayName: "EDS",
+    id: "YD",
+    username: "YD",
+    displayName: "YD",
     note: "Original thread member. Silent contributor.",
   },
   {
-    id: "TDH",
-    username: "TDH",
-    displayName: "TDH",
+    id: "TOD",
+    username: "TOD",
+    displayName: "TOD",
     note: "Original thread member. Suspected Yahoo Answers poster.",
   },
 ];

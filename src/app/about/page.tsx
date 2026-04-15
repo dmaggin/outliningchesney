@@ -73,15 +73,15 @@ export default function AboutPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-display font-bold text-charcoal mb-6">Timeline</h2>
         <div className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-ocean/20" />
+          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-sand/40" />
           <div className="space-y-6">
             {timeline.map((item, i) => (
               <div key={i} className="flex gap-4 items-start">
-                <div className="relative flex-shrink-0 w-8 h-8 rounded-full bg-ocean/10 border-2 border-ocean/30 flex items-center justify-center z-10">
-                  <div className="w-2 h-2 rounded-full bg-ocean" />
+                <div className="relative flex-shrink-0 w-8 h-8 rounded-full bg-white/90 border-2 border-sand shadow-sm flex items-center justify-center z-10">
+                  <div className="w-2 h-2 rounded-full bg-sand-warm" />
                 </div>
                 <div className="pt-1">
-                  <p className="text-xs font-mono font-semibold text-ocean">{item.year}</p>
+                  <p className="text-xs font-mono font-semibold text-sand-warm">{item.year}</p>
                   <p className="text-sm text-charcoal-light mt-0.5">{item.event}</p>
                 </div>
               </div>

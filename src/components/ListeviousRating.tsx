@@ -1,8 +1,10 @@
+import Link from "next/link";
+
 interface ListeviousRatingProps {
   score: number;
   brevity: number;
-  structure: number;
-  density: number;
+  simplicity: number;
+  compression: number;
   label: string;
   showBreakdown?: boolean;
 }
@@ -31,15 +33,17 @@ export function ListeviousRatingBadge({ score, label }: { score: number; label: 
 export function ListeviousRatingCard({
   score,
   brevity,
-  structure,
-  density,
+  simplicity,
+  compression,
   label,
   showBreakdown = true,
 }: ListeviousRatingProps) {
   return (
     <div className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/60 shadow-md p-5">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-charcoal">Listevious Rating</h3>
+        <Link href="/scoreboard" className="text-sm font-semibold text-charcoal hover:text-ocean transition-colors">
+          Listevious Rating
+        </Link>
         <div className="flex items-baseline gap-1">
           <span className="text-2xl font-bold text-ocean">{score.toFixed(1)}</span>
           <span className="text-xs text-charcoal-light">/10</span>
@@ -59,22 +63,29 @@ export function ListeviousRatingCard({
           </div>
           <div>
             <div className="flex justify-between text-xs mb-0.5">
-              <span className="text-charcoal-light">Structure</span>
-              <span className="font-medium text-charcoal">{structure.toFixed(1)}</span>
+              <span className="text-charcoal-light">Simplicity</span>
+              <span className="font-medium text-charcoal">{simplicity.toFixed(1)}</span>
             </div>
-            <ScoreBar value={structure} />
-            <p className="text-[0.6rem] text-charcoal-light/50 mt-0.5">Deeper nesting = cleaner hierarchy</p>
+            <ScoreBar value={simplicity} />
+            <p className="text-[0.6rem] text-charcoal-light/50 mt-0.5">Shallow, clean, formulaic structure</p>
           </div>
           <div>
             <div className="flex justify-between text-xs mb-0.5">
-              <span className="text-charcoal-light">Density</span>
-              <span className="font-medium text-charcoal">{density.toFixed(1)}</span>
+              <span className="text-charcoal-light">Compression</span>
+              <span className="font-medium text-charcoal">{compression.toFixed(1)}</span>
             </div>
-            <ScoreBar value={density} />
-            <p className="text-[0.6rem] text-charcoal-light/50 mt-0.5">More bullets per lyric word = more list-like</p>
+            <ScoreBar value={compression} />
+            <p className="text-[0.6rem] text-charcoal-light/50 mt-0.5">Fewer bullets to capture the whole song</p>
           </div>
         </div>
       )}
+
+      <Link
+        href="/scoreboard"
+        className="block mt-4 text-xs text-center text-ocean hover:text-ocean-dark transition-colors font-medium"
+      >
+        View full scoreboard &rarr;
+      </Link>
     </div>
   );
 }

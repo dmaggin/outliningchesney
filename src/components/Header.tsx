@@ -26,6 +26,12 @@ export function Header() {
               Browse Outlines
             </Link>
             <Link
+              href="/scoreboard"
+              className="text-sm font-medium text-charcoal-light hover:text-ocean transition-colors"
+            >
+              Scoreboard
+            </Link>
+            <Link
               href="/about"
               className="text-sm font-medium text-charcoal-light hover:text-ocean transition-colors"
             >

@@ -1060,89 +1060,112 @@ function countOutlineWords(nodes: OutlineNode[]): number {
   return count;
 }
 
-// Average words per bullet — lower = punchier = more outlineable
+// Average words per bullet
 function avgWordsPerBullet(nodes: OutlineNode[]): number {
   const total = countNodes(nodes);
   const words = countOutlineWords(nodes);
   return total > 0 ? words / total : 0;
 }
 
-// Count how many nodes have children (branching nodes)
-function countBranchingNodes(nodes: OutlineNode[]): number {
-  let count = 0;
-  for (const node of nodes) {
-    if (node.children && node.children.length > 0) {
-      count += 1;
-      count += countBranchingNodes(node.children);
-    }
-  }
-  return count;
+// Get children counts for top-level nodes (regularity check)
+function getChildCounts(nodes: OutlineNode[]): number[] {
+  return nodes.map((n) => (n.children ? n.children.length : 0));
 }
 
 /**
  * Listevious Rating — how outlineable is this song?
  *
- * Three components (each scored 0-10, then averaged):
+ * The thesis: the most outlineable song is SIMPLE and FORMULAIC.
+ * It compresses into few bullets, has shallow clean structure
+ * (a few top-level items, each with a handful of sub-items),
+ * and uses short punchy bullet text.
  *
- * 1. BREVITY — how punchy are the bullets?
+ * Three components (each scored 0-10, weighted average):
+ *
+ * 1. BREVITY (30%) — how punchy are the bullets?
  *    Fewer avg words per bullet = higher score.
- *    1 word avg = 10, 8+ words avg = 1
  *
- * 2. STRUCTURE — how well does it nest?
- *    Combines nesting depth + branching ratio.
- *    Deep nesting with many branching nodes = high score.
+ * 2. SIMPLICITY (35%) — how clean and flat is the structure?
+ *    Ideal: depth 2 (top items + sub-items), evenly distributed.
+ *    Deeper nesting = more complex = LESS outlineable.
+ *    The perfect Chesney outline: A(4 subs), B(4 subs), Chorus, repeat.
  *
- * 3. DENSITY — how many bullets per lyric word?
- *    More bullets relative to song length = more list-like.
- *    Songs that ARE lists have high density.
+ * 3. COMPRESSION (35%) — how efficiently does the outline capture the song?
+ *    FEWER bullets per lyric word = better. The song compresses into less.
+ *    If you need tons of bullets, the song isn't really that outlineable.
  */
 export function getListeviousRating(outline: Outline): {
-  score: number;       // 0-10 composite
-  brevity: number;     // 0-10
-  structure: number;   // 0-10
-  density: number;     // 0-10
+  score: number;
+  brevity: number;
+  simplicity: number;
+  compression: number;
   label: string;
 } {
   const bullets = countNodes(outline.content);
   const depth = maxDepth(outline.content);
   const avgWpb = avgWordsPerBullet(outline.content);
-  const branching = countBranchingNodes(outline.content);
-  const branchRatio = bullets > 0 ? branching / bullets : 0;
+  const topLevel = outline.content.length;
+  const childCounts = getChildCounts(outline.content);
 
-  // Brevity: avg words per bullet. 1-2 words = 10, 7+ = 2
+  // BREVITY: avg words per bullet. 1-2 words = 10, 8+ words = 1
   const brevity = Math.max(1, Math.min(10,
     10 - ((avgWpb - 1.5) * 1.3)
   ));
 
-  // Structure: depth (1-4 mapped to 2-8) + branching ratio bonus (0-2)
-  const depthScore = Math.min(8, (depth - 1) * 2.5 + 2);
-  const branchBonus = Math.min(2, branchRatio * 6);
-  const structure = Math.max(1, Math.min(10, depthScore + branchBonus));
+  // SIMPLICITY: shallow + regular structure scores highest
+  // Depth scoring: 2 is ideal (10), 3 is ok (6), 1 is flat (4), 4+ is complex (2)
+  let depthScore: number;
+  if (depth === 2) depthScore = 10;
+  else if (depth === 3) depthScore = 6;
+  else if (depth === 1) depthScore = 4;
+  else depthScore = Math.max(1, 4 - (depth - 3) * 2);
 
-  // Density: bullets per lyric word. Higher = more list-like
-  const bulletsPerWord = outline.lyricWordCount > 0
-    ? bullets / outline.lyricWordCount
+  // Regularity bonus: how evenly are children distributed?
+  // Low std deviation of children per top-level node = formulaic
+  const avgChildren = childCounts.length > 0
+    ? childCounts.reduce((a, b) => a + b, 0) / childCounts.length
     : 0;
-  // 0.10 bullets/word = ~7, 0.15+ = 10, 0.04 = 2
-  const density = Math.max(1, Math.min(10,
-    bulletsPerWord * 65
+  const variance = childCounts.length > 0
+    ? childCounts.reduce((sum, c) => sum + (c - avgChildren) ** 2, 0) / childCounts.length
+    : 0;
+  const stdDev = Math.sqrt(variance);
+  // stdDev 0-1 = very regular (+2), stdDev 3+ = irregular (+0)
+  const regularityBonus = Math.max(0, Math.min(2, 2 - stdDev * 0.7));
+
+  // Top-level count bonus: 3-8 top-level items is ideal (clean sections)
+  const topBonus = (topLevel >= 3 && topLevel <= 8) ? 1 : 0;
+
+  const simplicity = Math.max(1, Math.min(10, depthScore + regularityBonus + topBonus));
+
+  // COMPRESSION: lyric words per bullet. MORE words per bullet = better compression.
+  // The song captures more meaning per bullet point.
+  const wordsPerBullet = outline.lyricWordCount > 0
+    ? outline.lyricWordCount / bullets
+    : 0;
+  // 15+ words/bullet = 10 (amazing compression)
+  // 10 words/bullet = 7
+  // 5 words/bullet = 4
+  // 3 words/bullet = 2
+  const compression = Math.max(1, Math.min(10,
+    wordsPerBullet * 0.65
   ));
 
-  const score = Math.round(((brevity + structure + density) / 3) * 10) / 10;
+  // Weighted average: simplicity and compression matter most
+  const score = (brevity * 0.30 + simplicity * 0.35 + compression * 0.35);
 
   let label: string;
-  if (score >= 8.5) label = "Extremely Listevious";
-  else if (score >= 7) label = "Very Listevious";
-  else if (score >= 5.5) label = "Moderately Listevious";
-  else if (score >= 4) label = "Somewhat Listevious";
-  else if (score >= 2.5) label = "Barely Listevious";
+  if (score >= 8) label = "Extremely Listevious";
+  else if (score >= 6.5) label = "Very Listevious";
+  else if (score >= 5) label = "Listevious";
+  else if (score >= 3.5) label = "Somewhat Listevious";
+  else if (score >= 2) label = "Barely Listevious";
   else label = "Un-Listevious";
 
   return {
     score: Math.round(score * 10) / 10,
     brevity: Math.round(brevity * 10) / 10,
-    structure: Math.round(structure * 10) / 10,
-    density: Math.round(density * 10) / 10,
+    simplicity: Math.round(simplicity * 10) / 10,
+    compression: Math.round(compression * 10) / 10,
     label,
   };
 }

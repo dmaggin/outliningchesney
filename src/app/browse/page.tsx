@@ -2,10 +2,9 @@
 
 import { useState, useMemo } from "react";
 import { OutlineCard } from "@/components/OutlineCard";
-import { outlines } from "@/data/outlines";
-import type { Metadata } from "next";
+import { outlines, getListeviousRating } from "@/data/outlines";
 
-type SortOption = "newest" | "oldest" | "artist" | "title";
+type SortOption = "newest" | "oldest" | "artist" | "title" | "listevious";
 type FilterOption = "all" | "chesney" | "visiting";
 
 export default function BrowsePage() {
@@ -47,6 +46,9 @@ export default function BrowsePage() {
         break;
       case "title":
         results.sort((a, b) => a.songTitle.localeCompare(b.songTitle));
+        break;
+      case "listevious":
+        results.sort((a, b) => getListeviousRating(b).score - getListeviousRating(a).score);
         break;
     }
 
@@ -104,6 +106,7 @@ export default function BrowsePage() {
             <option value="oldest">Oldest First</option>
             <option value="artist">By Artist</option>
             <option value="title">By Title</option>
+            <option value="listevious">Most Listevious</option>
           </select>
         </div>
       </div>

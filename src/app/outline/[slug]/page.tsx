@@ -8,6 +8,7 @@ import { ListeviousRatingCard } from "@/components/ListeviousRating";
 import { StrawHat } from "@/components/StrawHat";
 import { outlines, getOutlineBySlug, getOutlineStats, getListeviousRating } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
+import { comments } from "@/data/comments";
 
 export function generateStaticParams() {
   return outlines.map((o) => ({ slug: o.slug }));
@@ -52,7 +53,7 @@ export default async function OutlinePage({
   const formattedDate = `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}/${String(d.getUTCFullYear()).slice(2)}`;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm">
         <Link href="/browse" className="text-charcoal-light hover:text-ocean transition-colors">
@@ -113,8 +114,18 @@ export default async function OutlinePage({
         </div>
       )}
 
-      {/* The Outline */}
-      <OutlineRenderer content={outline.content} />
+      {/* Outline + Rating: side by side on desktop, rating above on mobile */}
+      <div className="flex flex-col-reverse lg:flex-row lg:items-start gap-6">
+        {/* The Outline */}
+        <div className="flex-1 min-w-0">
+          <OutlineRenderer content={outline.content} />
+        </div>
+
+        {/* Listevious Rating — sidebar on desktop, above outline on mobile */}
+        <div className="lg:w-64 flex-shrink-0 lg:sticky lg:top-20">
+          <ListeviousRatingCard {...rating} />
+        </div>
+      </div>
 
       {/* Duplicate Version */}
       {duplicate && (
@@ -140,10 +151,41 @@ export default async function OutlinePage({
         </div>
       )}
 
-      {/* Listevious Rating */}
-      <div className="mt-8">
-        <ListeviousRatingCard {...rating} />
-      </div>
+      {/* Comments Thread */}
+      {(() => {
+        const songComments = comments.filter((c) => c.outlineSlug === outline.slug);
+        if (songComments.length === 0) return null;
+        return (
+          <div className="mt-10">
+            <h3 className="font-semibold text-charcoal mb-4">
+              Comments ({songComments.length})
+            </h3>
+            <div className="space-y-3">
+              {songComments.map((c) => (
+                <div
+                  key={c.id}
+                  className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/60 shadow-sm p-4"
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-semibold text-charcoal">{c.author}</span>
+                      {c.type === "edit-suggestion" && (
+                        <span className="text-[0.55rem] font-semibold text-ocean-deep bg-ocean/10 px-1.5 py-0.5 rounded-full uppercase tracking-wide">
+                          Edit Suggestion
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-xs text-charcoal-light/50">{c.date}</span>
+                  </div>
+                  <p className="text-sm text-charcoal-light leading-relaxed whitespace-pre-wrap">
+                    {c.content}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Feedback Form */}
       <div className="mt-10">

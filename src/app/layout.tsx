@@ -31,6 +31,26 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-full flex flex-col bg-sky text-charcoal">
+        {/* Hidden forms for Netlify Forms detection */}
+        <form name="outline-submission" data-netlify="true" netlify-honeypot="bot-field" hidden>
+          <input name="form-name" type="hidden" value="outline-submission" />
+          <input name="bot-field" />
+          <input name="submitter" />
+          <input name="song-title" />
+          <input name="artist" />
+          <textarea name="outline" />
+          <textarea name="notes" />
+        </form>
+        <form name="outline-feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+          <input name="form-name" type="hidden" value="outline-feedback" />
+          <input name="bot-field" />
+          <input name="outline-slug" />
+          <input name="song-title" />
+          <input name="feedback-type" />
+          <input name="name" />
+          <textarea name="content" />
+        </form>
+
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

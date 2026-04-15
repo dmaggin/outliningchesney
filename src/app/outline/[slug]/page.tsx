@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { OutlineRenderer } from "@/components/OutlineRenderer";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
+import { FeedbackForm } from "@/components/FeedbackForm";
 import { outlines, getOutlineBySlug, getOutlineStats } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
 
@@ -142,8 +143,13 @@ export default async function OutlinePage({
         </div>
       )}
 
+      {/* Feedback Form */}
+      <div className="mt-10">
+        <FeedbackForm outlineSlug={outline.slug} songTitle={outline.songTitle} />
+      </div>
+
       {/* Share / Nav */}
-      <div className="mt-10 pt-6 border-t border-ocean/10 flex items-center justify-between">
+      <div className="mt-8 pt-6 border-t border-ocean/10 flex items-center justify-between">
         <Link
           href="/browse"
           className="text-sm text-charcoal-light hover:text-ocean transition-colors"

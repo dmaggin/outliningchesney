@@ -31,6 +31,12 @@ export function Header() {
             >
               About
             </Link>
+            <Link
+              href="/submit"
+              className="text-sm font-semibold text-white bg-ocean hover:bg-ocean-dark px-4 py-1.5 rounded-full transition-colors"
+            >
+              Submit Outline
+            </Link>
             <SandyButton />
           </div>
 
@@ -81,6 +87,13 @@ export function Header() {
               className="text-sm font-medium text-charcoal-light hover:text-ocean"
             >
               About
+            </Link>
+            <Link
+              href="/submit"
+              onClick={() => setMenuOpen(false)}
+              className="text-sm font-medium text-charcoal-light hover:text-ocean"
+            >
+              Submit Outline
             </Link>
           </div>
         )}

@@ -443,7 +443,7 @@ export const outlines: Outline[] = [
     isChesney: true,
     lyricWordCount: 290,
     editorialNote:
-      'Dan called this "the listeous of all cheznwazzle songs, which is saying a lot. Also, it should be noted that the way the vocals in the song are done, the song sounds like a laundry list of ideas. Very listevious."',
+      'DMM called this "the listeous of all cheznwazzle songs, which is saying a lot. Also, it should be noted that the way the vocals in the song are done, the song sounds like a laundry list of ideas. Very listevious."',
     content: [
       {
         text: "[I am]",
@@ -513,7 +513,7 @@ export const outlines: Outline[] = [
     isChesney: false,
     lyricWordCount: 160,
     editorialNote:
-      'Dan acknowledged "that last one didn\'t work as well as I thought it might." Then Ben ALSO outlined Paint It Black months later without realizing Dan had already done it. Dan noticed 18 months later: "Did BDM outline the Stones song not realizing I had already outlined that same song?" Ben replied: "ww appurrently i did."',
+      'DMM acknowledged "that last one didn\'t work as well as I thought it might." Then BDM ALSO outlined Paint It Black months later without realizing DMM had already done it. DMM noticed 18 months later: "Did BDM outline the Stones song not realizing I had already outlined that same song?" BDM replied: "ww appurrently i did."',
     isDuplicate: true,
     duplicateOf: "paint-it-black-rolling-stones-bdm",
     content: [
@@ -581,7 +581,7 @@ export const outlines: Outline[] = [
     isChesney: false,
     lyricWordCount: 160,
     editorialNote:
-      "The duplicate! Ben independently outlined the same song two months later without realizing Dan had already done it. Great minds think alike.",
+      "The duplicate! BDM independently outlined the same song two months later without realizing DMM had already done it. Great minds think alike.",
     isDuplicate: true,
     duplicateOf: "paint-it-black-rolling-stones-dmm",
     content: [
@@ -663,7 +663,7 @@ export const outlines: Outline[] = [
     isChesney: false,
     lyricWordCount: 220,
     editorialNote:
-      'Dan prefaced this with "I also looked into doing some weird al songs and they didn\'t seem to work either for the most part. I think this one might be ok." The outline is long and repetitive (lots of "eat it" lines) — which itself is the joke.',
+      'DMM prefaced this with "I also looked into doing some weird al songs and they didn\'t seem to work either for the most part. I think this one might be ok." The outline is long and repetitive (lots of "eat it" lines) — which itself is the joke.',
     content: [
       {
         text: "How come you",
@@ -788,7 +788,7 @@ export const outlines: Outline[] = [
     isChesney: false,
     lyricWordCount: 230,
     editorialNote:
-      'Matt\'s attempt at a non-Chesney outline. He commented afterward: "It\'s really true that nothing works quite like a Chesney song (or runs like a Deere)."',
+      'MJM\'s attempt at a non-Chesney outline. He commented afterward: "It\'s really true that nothing works quite like a Chesney song (or runs like a Deere)."',
     content: [
       {
         text: "This ain't",
@@ -836,7 +836,7 @@ export const outlines: Outline[] = [
     isChesney: false,
     lyricWordCount: 200,
     editorialNote:
-      'Dan called this "probably one of the more outlinable REM songs" and noted it would be "interesting to note the average length of various outlines."',
+      'DMM called this "probably one of the more outlinable REM songs" and noted it would be "interesting to note the average length of various outlines."',
     content: [
       {
         text: "I",

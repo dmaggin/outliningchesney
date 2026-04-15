@@ -78,7 +78,7 @@ export const loreQuotes: LoreQuote[] = [
   {
     id: "the-sheila-forward",
     quote:
-      "Matt and I were discussing how Kenny Chesney songs are always lists.. so we started keeping track of them (via outline), and that turned into outlining others.. feel free to peruse the thread",
+      "MJM and I were discussing how Kenny Chesney songs are always lists.. so we started keeping track of them (via outline), and that turned into outlining others.. feel free to peruse the thread",
     attribution: "DMM",
     date: "July 17, 2010",
     context: "The Origin Pitch",
@@ -102,12 +102,12 @@ export const loreQuotes: LoreQuote[] = [
 export const timeline = [
   { year: "Jul 2010", event: "First outlines exchanged via email between friends" },
   { year: "Jul 2010", event: "The Discovery: Chesney songs are uniquely outlineable" },
-  { year: "Sep 2010", event: "The Duplicate Incident: Ben outlines Paint It Black without realizing Dan already did" },
-  { year: "Feb 2012", event: "Dan discovers the duplicate, 18 months later" },
-  { year: "Mar 2013", event: 'Ben suggests "we should create a song-diagraming website"' },
-  { year: "Mar 2013", event: "Dan checks domain availability for OutliningChesney.com" },
-  { year: "May 2013", event: 'Dan outlines "Live a Little" — the listeous of all cheznwazzle songs' },
-  { year: "Jun 2013", event: "Matt finds a Yahoo Answers link about Chesney songs being lists" },
+  { year: "Sep 2010", event: "The Duplicate Incident: BDM outlines Paint It Black without realizing DMM already did" },
+  { year: "Feb 2012", event: "DMM discovers the duplicate, 18 months later" },
+  { year: "Mar 2013", event: 'BDM suggests "we should create a song-diagraming website"' },
+  { year: "Mar 2013", event: "DMM checks domain availability for OutliningChesney.com" },
+  { year: "May 2013", event: 'DMM outlines "Live a Little" — the listeous of all cheznwazzle songs' },
+  { year: "Jun 2013", event: "MJM finds a Yahoo Answers link about Chesney songs being lists" },
   { year: "Aug 2014", event: 'Last thread message: "American Kids needs to be added here"' },
   { year: "2026", event: "The site finally launches. It was worth the wait." },
 ];

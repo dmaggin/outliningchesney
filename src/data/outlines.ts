@@ -1153,7 +1153,7 @@ export function getListeviousRating(outline: Outline): {
   // Apply Chesney multiplier: Chesney songs get a 1.2x boost,
   // non-Chesney songs get a 1/1.2 penalty. The thesis is that
   // Chesney songs are inherently more outlineable.
-  const multiplier = outline.isChesney ? 1.2 : (1 / 1.2);
+  const multiplier = outline.isChesney ? 1.2 : 1;
 
   const adjBrevity = Math.min(10, brevity > 0 ? brevity * multiplier : 0);
   const adjSimplicity = Math.min(10, simplicity > 0 ? simplicity * multiplier : 0);

@@ -2,21 +2,34 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-sunset: #FF6B35;
-  --color-sunset-dark: #E85D2A;
-  --color-ocean: #00B4D8;
-  --color-ocean-dark: #0096B7;
-  --color-ocean-light: #7DD3E8;
-  --color-sand: #FFD166;
-  --color-sand-light: #FFF3D6;
-  --color-charcoal: #2D3748;
-  --color-charcoal-light: #4A5568;
-  --color-cream: #FFF9EE;
-  --color-coral: #FF8C69;
-  --color-lime: #A8E06C;
-  --color-pink: #FF6B9D;
-  --color-sky: #E0F4FD;
-  --color-seafoam: #B2F0E8;
+  /* Caribbean turquoise — the dominant Chesney color */
+  --color-ocean: #0AB4C7;
+  --color-ocean-dark: #0899A8;
+  --color-ocean-light: #5CD6E4;
+  --color-ocean-deep: #007C8A;
+
+  /* Warm straw/sand — like the hat, the beach */
+  --color-sand: #D4A853;
+  --color-sand-light: #F5E6C8;
+  --color-sand-warm: #C4943F;
+  --color-sand-pale: #FFF4E0;
+
+  /* Sun-bleached warm tones */
+  --color-sunset: #E8853A;
+  --color-sunset-dark: #D0742E;
+  --color-coral: #E07A5F;
+
+  /* Sky */
+  --color-sky: #D9F0F7;
+  --color-sky-bright: #B8E4F0;
+  --color-seafoam: #A8E6D9;
+
+  /* Text */
+  --color-charcoal: #2C3E50;
+  --color-charcoal-light: #546E7A;
+
+  /* Surfaces */
+  --color-cream: #FFFCF5;
 
   --font-sans: 'Outfit', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -24,8 +37,8 @@
 }
 
 :root {
-  --background: #E0F4FD;
-  --foreground: #2D3748;
+  --background: #D9F0F7;
+  --foreground: #2C3E50;
 }
 
 body {
@@ -35,32 +48,31 @@ body {
   position: relative;
 }
 
-/* Ocean water background — layered across entire page */
+/* Ocean water background — shallow Caribbean water look */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   background:
-    /* Soft caustic light ripples */
-    radial-gradient(ellipse 600px 200px at 10% 30%, rgba(178, 240, 232, 0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 250px at 85% 60%, rgba(0, 180, 216, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 800px 300px at 50% 90%, rgba(178, 240, 232, 0.3) 0%, transparent 70%),
-    radial-gradient(ellipse 400px 200px at 30% 70%, rgba(125, 211, 232, 0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 600px 200px at 70% 20%, rgba(255, 209, 102, 0.1) 0%, transparent 60%),
-    /* Base gradient — shallow tropical water */
+    /* Sunlight caustics on water */
+    radial-gradient(ellipse 700px 250px at 15% 25%, rgba(168, 230, 217, 0.4) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 300px at 80% 55%, rgba(10, 180, 199, 0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 900px 350px at 45% 85%, rgba(168, 230, 217, 0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 200px at 65% 15%, rgba(255, 244, 224, 0.3) 0%, transparent 60%),
+    /* Base — clear shallow tropical water */
     linear-gradient(
       180deg,
-      #E0F4FD 0%,
-      #D0EFFA 15%,
-      #C4EBF8 30%,
-      #D6F1FB 50%,
-      #E0F4FD 70%,
-      #D0EFFA 100%
+      #D9F0F7 0%,
+      #CCEDF5 20%,
+      #BFE8F2 40%,
+      #CCEDF5 60%,
+      #D9F0F7 80%,
+      #CCEDF5 100%
     );
 }
 
-/* Animated subtle wave overlay */
+/* Subtle light refraction lines on water */
 @keyframes wave-drift {
   0% { background-position: 0% 50%, 100% 50%; }
   50% { background-position: 100% 50%, 0% 50%; }
@@ -72,30 +84,30 @@ body::after {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.3;
+  opacity: 0.25;
   background:
     repeating-linear-gradient(
       100deg,
       transparent,
-      transparent 40px,
-      rgba(255, 255, 255, 0.3) 40px,
-      rgba(255, 255, 255, 0.3) 42px,
-      transparent 42px,
-      transparent 80px
+      transparent 50px,
+      rgba(255, 255, 255, 0.35) 50px,
+      rgba(255, 255, 255, 0.35) 52px,
+      transparent 52px,
+      transparent 100px
     ),
     repeating-linear-gradient(
       80deg,
       transparent,
-      transparent 60px,
-      rgba(255, 255, 255, 0.2) 60px,
-      rgba(255, 255, 255, 0.2) 62px,
-      transparent 62px,
-      transparent 120px
+      transparent 70px,
+      rgba(255, 255, 255, 0.2) 70px,
+      rgba(255, 255, 255, 0.2) 72px,
+      transparent 72px,
+      transparent 140px
     );
-  animation: wave-drift 30s ease-in-out infinite;
+  animation: wave-drift 35s ease-in-out infinite;
 }
 
-/* Outline content styling — monospace for that academic humor */
+/* Outline content styling */
 .outline-content {
   font-family: var(--font-mono);
   font-size: 0.875rem;
@@ -119,54 +131,44 @@ body::after {
 }
 
 .outline-node .outline-node::before {
-  background-color: var(--color-sunset);
+  background-color: var(--color-sand);
   width: 5px;
   height: 5px;
 }
 
 .outline-node .outline-node .outline-node::before {
-  background-color: var(--color-sand);
-  width: 4px;
-  height: 4px;
-}
-
-.outline-node .outline-node .outline-node .outline-node::before {
   background-color: var(--color-coral);
   width: 4px;
   height: 4px;
 }
 
-/* Hero section — bright sky-to-water gradient with sand */
-.sand-texture {
-  background:
-    radial-gradient(ellipse 100% 60% at 50% 120%, rgba(255, 209, 102, 0.4) 0%, transparent 70%),
-    radial-gradient(circle at 20% 80%, rgba(255, 140, 105, 0.2) 0%, transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
-    linear-gradient(
-      180deg,
-      #FFF3D6 0%,
-      #FFE8B8 20%,
-      #FFD166 50%,
-      #FFBB44 70%,
-      #FF8C69 100%
-    );
+.outline-node .outline-node .outline-node .outline-node::before {
+  background-color: var(--color-ocean-light);
+  width: 4px;
+  height: 4px;
 }
 
-/* Gradient for hero */
-.sunset-gradient {
-  background: linear-gradient(
-    135deg,
-    #FF6B35 0%,
-    #FF8C69 25%,
-    #FFD166 50%,
-    #00B4D8 75%,
-    #0096B7 100%
-  );
+/* Hero — sky above, warm sand below, like looking at the beach from the water */
+.sand-texture {
+  background:
+    /* Sun glow top center */
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 244, 224, 0.8) 0%, transparent 60%),
+    /* Warm sand tones */
+    radial-gradient(ellipse 100% 70% at 50% 110%, rgba(212, 168, 83, 0.25) 0%, transparent 60%),
+    linear-gradient(
+      180deg,
+      #FFF8EC 0%,
+      #FCEFD5 15%,
+      #F5E6C8 35%,
+      #EDD9AE 55%,
+      #E4CC96 75%,
+      #D9F0F7 100%
+    );
 }
 
 /* Badge styles */
 .badge-founder {
-  background: linear-gradient(135deg, #FFD166, #FF6B35);
+  background: linear-gradient(135deg, #D4A853, #C4943F);
   color: white;
   font-size: 0.7rem;
   font-weight: 700;
@@ -178,7 +180,7 @@ body::after {
 
 .badge-visiting {
   background: linear-gradient(135deg, #E2E8F0, #CBD5E0);
-  color: #4A5568;
+  color: #546E7A;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -188,7 +190,7 @@ body::after {
 }
 
 .badge-duplicate {
-  background: linear-gradient(135deg, #00B4D8, #0096B7);
+  background: linear-gradient(135deg, #0AB4C7, #0899A8);
   color: white;
   font-size: 0.65rem;
   font-weight: 600;
@@ -198,20 +200,20 @@ body::after {
   border-radius: 9999px;
 }
 
-/* Card hover effect */
+/* Card hover */
 .outline-card {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .outline-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(0, 180, 216, 0.2), 0 4px 10px -5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px -5px rgba(10, 180, 199, 0.2), 0 4px 10px -5px rgba(0, 0, 0, 0.06);
 }
 
-/* Decorative wave divider */
+/* Wave divider — sand to water transition */
 .wave-divider {
   position: relative;
-  height: 40px;
+  height: 50px;
   overflow: hidden;
 }
 
@@ -222,6 +224,6 @@ body::after {
   left: -5%;
   width: 110%;
   height: 100%;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,35 400,5 600,20 C800,35 1000,5 1200,20 L1200,40 L0,40 Z' fill='%23E0F4FD'/%3E%3C/svg%3E") repeat-x;
-  background-size: 1200px 40px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 50'%3E%3Cpath d='M0,25 C150,40 350,10 600,25 C850,40 1050,10 1200,25 L1200,50 L0,50 Z' fill='%23D9F0F7'/%3E%3C/svg%3E") repeat-x;
+  background-size: 1200px 50px;
 }

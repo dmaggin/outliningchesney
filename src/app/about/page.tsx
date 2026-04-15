@@ -53,9 +53,9 @@ export default function AboutPage() {
             .map((q) => (
               <blockquote
                 key={q.id}
-                className="bg-white rounded-xl border border-sunset/10 p-5"
+                className="bg-white rounded-xl border border-white/60 p-5"
               >
-                <p className="text-xs font-semibold text-sunset uppercase tracking-wide mb-2">
+                <p className="text-xs font-semibold text-ocean uppercase tracking-wide mb-2">
                   {q.context}
                 </p>
                 <p className="text-charcoal italic leading-relaxed">
@@ -73,15 +73,15 @@ export default function AboutPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-display font-bold text-charcoal mb-6">Timeline</h2>
         <div className="relative">
-          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-sunset/20" />
+          <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-ocean/20" />
           <div className="space-y-6">
             {timeline.map((item, i) => (
               <div key={i} className="flex gap-4 items-start">
-                <div className="relative flex-shrink-0 w-8 h-8 rounded-full bg-sunset/10 border-2 border-sunset/30 flex items-center justify-center z-10">
-                  <div className="w-2 h-2 rounded-full bg-sunset" />
+                <div className="relative flex-shrink-0 w-8 h-8 rounded-full bg-ocean/10 border-2 border-ocean/30 flex items-center justify-center z-10">
+                  <div className="w-2 h-2 rounded-full bg-ocean" />
                 </div>
                 <div className="pt-1">
-                  <p className="text-xs font-mono font-semibold text-sunset">{item.year}</p>
+                  <p className="text-xs font-mono font-semibold text-ocean">{item.year}</p>
                   <p className="text-sm text-charcoal-light mt-0.5">{item.event}</p>
                 </div>
               </div>
@@ -101,10 +101,10 @@ export default function AboutPage() {
             return (
               <div
                 key={f.id}
-                className="bg-white rounded-xl border border-sunset/10 p-5"
+                className="bg-white rounded-xl border border-white/60 p-5"
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sunset to-sand flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-ocean to-ocean-light flex items-center justify-center">
                     <span className="text-white font-bold text-sm">{f.id}</span>
                   </div>
                   <div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
       </section>
 
       {/* Why Chesney */}
-      <section className="mb-12 bg-sunset/5 border border-sunset/10 rounded-xl p-6 sm:p-8">
+      <section className="mb-12 bg-ocean/5 border border-white/60 rounded-xl p-6 sm:p-8">
         <h2 className="text-2xl font-display font-bold text-charcoal mb-4">
           Why Chesney?
         </h2>
@@ -152,7 +152,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="text-center py-8 border-t border-sunset/10">
+      <section className="text-center py-8 border-t border-white/60">
         <p className="text-sm text-charcoal-light">
           Current collection: <strong className="text-charcoal">{outlines.length} outlines</strong>
           {" "}across{" "}
@@ -160,7 +160,7 @@ export default function AboutPage() {
             {new Set(outlines.map((o) => o.artist)).size} artists
           </strong>
           . Chesney songs represent{" "}
-          <strong className="text-sunset">
+          <strong className="text-ocean">
             {Math.round(
               (outlines.filter((o) => o.isChesney).length / outlines.length) * 100
             )}
@@ -170,7 +170,7 @@ export default function AboutPage() {
         </p>
         <Link
           href="/browse"
-          className="inline-block mt-4 text-sm font-semibold text-sunset hover:text-sunset-dark transition-colors"
+          className="inline-block mt-4 text-sm font-semibold text-ocean hover:text-ocean-dark transition-colors"
         >
           Browse all outlines &rarr;
         </Link>

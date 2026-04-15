@@ -16,10 +16,10 @@ export function Footer() {
           <div>
             <p className="font-semibold text-charcoal text-sm mb-2">Navigate</p>
             <div className="flex flex-col gap-1.5">
-              <Link href="/browse" className="text-sm text-charcoal-light hover:text-sunset transition-colors">
+              <Link href="/browse" className="text-sm text-charcoal-light hover:text-ocean transition-colors">
                 Browse Outlines
               </Link>
-              <Link href="/about" className="text-sm text-charcoal-light hover:text-sunset transition-colors">
+              <Link href="/about" className="text-sm text-charcoal-light hover:text-ocean transition-colors">
                 The Origin Story
               </Link>
             </div>
@@ -32,7 +32,7 @@ export function Footer() {
             <p className="text-xs text-charcoal-light/60 mt-1">— MJM, July 2010</p>
           </div>
         </div>
-        <div className="mt-8 pt-6 border-t border-sunset/10 text-center">
+        <div className="mt-8 pt-6 border-t border-white/40 text-center">
           <p className="text-xs text-charcoal-light/50">
             A project 16 years in the making. Not affiliated with Kenny Chesney, but we hope he&apos;d appreciate the humor.
           </p>

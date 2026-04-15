@@ -19,7 +19,7 @@ export function OutlineCard({ outline }: { outline: Outline }) {
           </div>
           <div className="flex-shrink-0 flex gap-1.5">
             {outline.isChesney ? (
-              <span className="inline-block bg-sunset/10 text-sunset text-xs font-semibold px-2 py-0.5 rounded-full">
+              <span className="inline-block bg-ocean/10 text-ocean-deep text-xs font-semibold px-2 py-0.5 rounded-full">
                 Chesney
               </span>
             ) : (

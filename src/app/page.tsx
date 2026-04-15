@@ -20,7 +20,7 @@ export default function HomePage() {
           <Logo size={80} className="mx-auto mb-6 drop-shadow-lg" />
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-charcoal leading-tight drop-shadow-sm">
             Outlining{" "}
-            <span className="text-sunset italic">Chesney</span>
+            <span className="text-ocean-deep italic">Chesney</span>
           </h1>
           <p className="mt-4 text-lg sm:text-xl text-charcoal/80 max-w-2xl mx-auto leading-relaxed">
             Kenny Chesney songs are so formulaic you can reduce them to
@@ -33,7 +33,7 @@ export default function HomePage() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/browse"
-              className="inline-flex items-center gap-2 bg-sunset hover:bg-sunset-dark text-white font-semibold px-6 py-3 rounded-full transition-colors shadow-lg shadow-sunset/30"
+              className="inline-flex items-center gap-2 bg-ocean hover:bg-ocean-dark text-white font-semibold px-6 py-3 rounded-full transition-colors shadow-lg shadow-ocean/30"
             >
               Browse Outlines
             </Link>
@@ -56,7 +56,7 @@ export default function HomePage() {
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-ocean/10 border border-white/60 px-6 py-5">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
               <div>
-                <p className="text-2xl sm:text-3xl font-bold text-sunset">{outlines.length}</p>
+                <p className="text-2xl sm:text-3xl font-bold text-ocean">{outlines.length}</p>
                 <p className="text-xs text-charcoal-light mt-1">Outlines</p>
               </div>
               <div>
@@ -64,7 +64,7 @@ export default function HomePage() {
                 <p className="text-xs text-charcoal-light mt-1">Artists</p>
               </div>
               <div>
-                <p className="text-2xl sm:text-3xl font-bold text-sunset">{chesneyPercent}%</p>
+                <p className="text-2xl sm:text-3xl font-bold text-sand-warm">{chesneyPercent}%</p>
                 <p className="text-xs text-charcoal-light mt-1">Chesney</p>
               </div>
               <div>
@@ -85,7 +85,7 @@ export default function HomePage() {
           </div>
           <Link
             href="/browse"
-            className="text-sm font-medium text-sunset hover:text-sunset-dark transition-colors"
+            className="text-sm font-medium text-ocean hover:text-ocean-dark transition-colors"
           >
             View all &rarr;
           </Link>
@@ -108,7 +108,7 @@ export default function HomePage() {
             Beach, beer, trucks, barefoot, nostalgia, sunset &mdash; it&apos;s a template.
           </p>
           {taglineQuote && (
-            <blockquote className="mt-6 border-l-4 border-sunset pl-4 text-left max-w-lg mx-auto">
+            <blockquote className="mt-6 border-l-4 border-sand pl-4 text-left max-w-lg mx-auto">
               <p className="italic text-charcoal-light">&ldquo;{taglineQuote.quote}&rdquo;</p>
               <cite className="text-xs text-charcoal-light/60 mt-1 block not-italic">
                 &mdash; {taglineQuote.attribution}, {taglineQuote.date}
@@ -117,7 +117,7 @@ export default function HomePage() {
           )}
           <Link
             href="/about"
-            className="inline-block mt-6 text-sm font-semibold text-sunset hover:text-sunset-dark transition-colors"
+            className="inline-block mt-6 text-sm font-semibold text-ocean hover:text-ocean-dark transition-colors"
           >
             Read the full origin story &rarr;
           </Link>

@@ -21,13 +21,13 @@ export function Header() {
           <div className="hidden md:flex items-center gap-6">
             <Link
               href="/browse"
-              className="text-sm font-medium text-charcoal-light hover:text-sunset transition-colors"
+              className="text-sm font-medium text-charcoal-light hover:text-ocean transition-colors"
             >
               Browse Outlines
             </Link>
             <Link
               href="/about"
-              className="text-sm font-medium text-charcoal-light hover:text-sunset transition-colors"
+              className="text-sm font-medium text-charcoal-light hover:text-ocean transition-colors"
             >
               About
             </Link>
@@ -67,18 +67,18 @@ export function Header() {
 
         {/* Mobile nav */}
         {menuOpen && (
-          <div className="md:hidden pb-4 border-t border-sunset/10 mt-2 pt-4 flex flex-col gap-3">
+          <div className="md:hidden pb-4 border-t border-ocean/10 mt-2 pt-4 flex flex-col gap-3">
             <Link
               href="/browse"
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-charcoal-light hover:text-sunset"
+              className="text-sm font-medium text-charcoal-light hover:text-ocean"
             >
               Browse Outlines
             </Link>
             <Link
               href="/about"
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-charcoal-light hover:text-sunset"
+              className="text-sm font-medium text-charcoal-light hover:text-ocean"
             >
               About
             </Link>

@@ -54,7 +54,7 @@ export default async function OutlinePage({
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm">
-        <Link href="/browse" className="text-charcoal-light hover:text-sunset transition-colors">
+        <Link href="/browse" className="text-charcoal-light hover:text-ocean transition-colors">
           Browse
         </Link>
         <span className="mx-2 text-charcoal-light/40">/</span>
@@ -65,7 +65,7 @@ export default async function OutlinePage({
       <div className="mb-8">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           {outline.isChesney ? (
-            <span className="inline-block bg-sunset/10 text-sunset text-xs font-semibold px-2.5 py-0.5 rounded-full">
+            <span className="inline-block bg-ocean/10 text-ocean-deep text-xs font-semibold px-2.5 py-0.5 rounded-full">
               Kenny Chesney
             </span>
           ) : (
@@ -101,8 +101,8 @@ export default async function OutlinePage({
 
       {/* Editorial Note */}
       {outline.editorialNote && (
-        <div className="mb-8 bg-sand/10 border border-sand/30 rounded-xl p-5">
-          <p className="text-xs font-semibold text-sand-dark uppercase tracking-wide mb-1">
+        <div className="mb-8 bg-sand-pale/80 border border-sand/20 rounded-xl p-5">
+          <p className="text-xs font-semibold text-sand-warm uppercase tracking-wide mb-1">
             Editorial Note
           </p>
           <p className="text-sm text-charcoal-light italic leading-relaxed">
@@ -143,10 +143,10 @@ export default async function OutlinePage({
       )}
 
       {/* Share / Nav */}
-      <div className="mt-10 pt-6 border-t border-sunset/10 flex items-center justify-between">
+      <div className="mt-10 pt-6 border-t border-ocean/10 flex items-center justify-between">
         <Link
           href="/browse"
-          className="text-sm text-charcoal-light hover:text-sunset transition-colors"
+          className="text-sm text-charcoal-light hover:text-ocean transition-colors"
         >
           &larr; Back to all outlines
         </Link>

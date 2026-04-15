@@ -1,4 +1,5 @@
 import type { OutlineNode } from "@/data/outlines";
+import { CopyOutlineButton } from "./CopyOutlineButton";
 
 function OutlineNodeComponent({ node, depth = 0 }: { node: OutlineNode; depth?: number }) {
   return (
@@ -17,7 +18,10 @@ function OutlineNodeComponent({ node, depth = 0 }: { node: OutlineNode; depth?: 
 
 export function OutlineRenderer({ content }: { content: OutlineNode[] }) {
   return (
-    <div className="outline-content bg-white/90 backdrop-blur-sm rounded-xl border border-white/60 p-5 sm:p-8 shadow-lg shadow-ocean/10">
+    <div className="outline-content relative bg-white/90 backdrop-blur-sm rounded-xl border border-white/60 p-5 sm:p-8 shadow-lg shadow-ocean/10">
+      <div className="absolute top-3 right-3">
+        <CopyOutlineButton content={content} />
+      </div>
       {content.map((node, i) => (
         <OutlineNodeComponent key={i} node={node} />
       ))}

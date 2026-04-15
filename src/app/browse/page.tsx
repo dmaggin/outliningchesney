@@ -70,7 +70,7 @@ export default function BrowsePage() {
             placeholder="Search songs, artists, or contributors..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-white border border-sunset/20 rounded-xl text-sm text-charcoal placeholder:text-charcoal-light/50 focus:outline-none focus:ring-2 focus:ring-sunset/30 focus:border-sunset/40"
+            className="w-full pl-10 pr-4 py-2.5 bg-white border border-ocean/15 rounded-xl text-sm text-charcoal placeholder:text-charcoal-light/50 focus:outline-none focus:ring-2 focus:ring-ocean/30 focus:border-ocean/30"
           />
           <svg
             className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-light/40"
@@ -88,7 +88,7 @@ export default function BrowsePage() {
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value as FilterOption)}
-            className="px-3 py-2.5 bg-white border border-sunset/20 rounded-xl text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-sunset/30"
+            className="px-3 py-2.5 bg-white border border-ocean/15 rounded-xl text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-ocean/30"
           >
             <option value="all">All Artists</option>
             <option value="chesney">Chesney Only</option>
@@ -98,7 +98,7 @@ export default function BrowsePage() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortOption)}
-            className="px-3 py-2.5 bg-white border border-sunset/20 rounded-xl text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-sunset/30"
+            className="px-3 py-2.5 bg-white border border-ocean/15 rounded-xl text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-ocean/30"
           >
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
@@ -126,7 +126,7 @@ export default function BrowsePage() {
       )}
 
       {/* Stats footer */}
-      <div className="mt-10 pt-6 border-t border-sunset/10 text-center">
+      <div className="mt-10 pt-6 border-t border-ocean/10 text-center">
         <p className="text-xs text-charcoal-light/50">
           Showing {filtered.length} of {outlines.length} outlines &middot;
           Chesney songs represent{" "}

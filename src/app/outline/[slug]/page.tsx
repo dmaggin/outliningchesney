@@ -5,6 +5,7 @@ import { OutlineRenderer } from "@/components/OutlineRenderer";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { FeedbackForm } from "@/components/FeedbackForm";
 import { ListeviousRatingCard } from "@/components/ListeviousRating";
+import { StrawHat } from "@/components/StrawHat";
 import { outlines, getOutlineBySlug, getOutlineStats, getListeviousRating } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
 
@@ -47,11 +48,8 @@ export default async function OutlinePage({
     ? getFounder(duplicate.contributorId)
     : undefined;
 
-  const formattedDate = new Date(outline.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const d = new Date(outline.date);
+  const formattedDate = `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}/${String(d.getUTCFullYear()).slice(2)}`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -68,9 +66,10 @@ export default async function OutlinePage({
       <div className="mb-8">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           {outline.isChesney ? (
-            <span className="inline-block bg-ocean/10 text-ocean-deep text-xs font-semibold px-2.5 py-0.5 rounded-full">
-              Kenny Chesney
-            </span>
+            <div className="flex items-center gap-1.5">
+              <StrawHat size={28} />
+              <span className="text-xs font-semibold text-sand-warm">Kenny Chesney</span>
+            </div>
           ) : (
             <span className="badge-visiting">Visiting Artist</span>
           )}
@@ -135,11 +134,7 @@ export default async function OutlinePage({
           <OutlineRenderer content={duplicate.content} />
           <p className="text-xs text-charcoal-light/50 mt-3 text-center">
             Outlined on{" "}
-            {new Date(duplicate.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {(() => { const dd = new Date(duplicate.date); return `${String(dd.getUTCMonth() + 1).padStart(2, "0")}/${String(dd.getUTCDate()).padStart(2, "0")}/${String(dd.getUTCFullYear()).slice(2)}`; })()}
             {" "}&mdash; independently, without knowledge of the version above.
           </p>
         </div>

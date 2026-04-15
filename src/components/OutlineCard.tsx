@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Outline } from "@/data/outlines";
 import { getOutlineStats, getListeviousRating } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
+import { StrawHat } from "./StrawHat";
 
 export function OutlineCard({ outline }: { outline: Outline }) {
   const stats = getOutlineStats(outline);
@@ -20,9 +21,7 @@ export function OutlineCard({ outline }: { outline: Outline }) {
           </div>
           <div className="flex-shrink-0 flex gap-1.5">
             {outline.isChesney ? (
-              <span className="inline-block bg-ocean/10 text-ocean-deep text-xs font-semibold px-2 py-0.5 rounded-full">
-                Chesney
-              </span>
+              <StrawHat size={26} />
             ) : (
               <span className="badge-visiting">Visiting Artist</span>
             )}

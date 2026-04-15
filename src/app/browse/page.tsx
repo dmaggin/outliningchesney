@@ -60,7 +60,7 @@ export default function BrowsePage() {
       <div className="mb-8">
         <h1 className="text-3xl font-display font-bold text-charcoal">Browse Outlines</h1>
         <p className="text-charcoal-light mt-1">
-          {outlines.length} outlines from the original email thread (2010&ndash;2014)
+          {outlines.length} outlines and counting.
         </p>
       </div>
 

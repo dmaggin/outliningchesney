@@ -46,6 +46,14 @@ export default function RootLayout({
           <textarea name="outline" />
           <textarea name="notes" />
         </form>
+        <form name="song-request" data-netlify="true" netlify-honeypot="bot-field" hidden>
+          <input name="form-name" type="hidden" value="song-request" />
+          <input name="bot-field" />
+          <input name="song-title" />
+          <input name="artist" />
+          <input name="requester-name" />
+          <textarea name="reason" />
+        </form>
         <form name="outline-feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
           <input name="form-name" type="hidden" value="outline-feedback" />
           <input name="bot-field" />

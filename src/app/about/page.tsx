@@ -160,7 +160,7 @@ export default function AboutPage() {
             {new Set(outlines.map((o) => o.artist)).size} artists
           </strong>
           . Chesney songs represent{" "}
-          <strong className="text-ocean">
+          <strong className="text-sand-warm">
             {Math.round(
               (outlines.filter((o) => o.isChesney).length / outlines.length) * 100
             )}
@@ -170,7 +170,7 @@ export default function AboutPage() {
         </p>
         <Link
           href="/browse"
-          className="inline-block mt-4 text-sm font-semibold text-ocean hover:text-ocean-dark transition-colors"
+          className="inline-block mt-4 text-sm font-semibold bg-white/80 text-charcoal hover:bg-white px-4 py-2 rounded-full transition-colors shadow-sm"
         >
           Browse all outlines &rarr;
         </Link>

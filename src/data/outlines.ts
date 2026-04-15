@@ -1162,7 +1162,7 @@ export function getListeviousRating(outline: Outline): {
   const score = (adjBrevity * 0.30 + adjSimplicity * 0.35 + adjCompression * 0.35);
 
   let label: string;
-  if (score >= 8) label = "Extremely Listevious";
+  if (score >= 8) label = "Way Too Many Listevious";
   else if (score >= 6.5) label = "Very Listevious";
   else if (score >= 5) label = "Listevious";
   else if (score >= 3.5) label = "Somewhat Listevious";

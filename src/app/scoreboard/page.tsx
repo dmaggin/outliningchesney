@@ -82,13 +82,6 @@ export default function ScoreboardPage() {
                 </p>
               </div>
 
-              {/* Score breakdown mini */}
-              <div className="hidden sm:flex items-center gap-3 text-[0.6rem] text-charcoal-light/50 flex-shrink-0">
-                <span>B:{r.rating.brevity.toFixed(1)}</span>
-                <span>S:{r.rating.simplicity.toFixed(1)}</span>
-                <span>C:{r.rating.compression.toFixed(1)}</span>
-              </div>
-
               {/* Score */}
               <div className="flex-shrink-0 text-right">
                 <p className="text-xl font-bold text-ocean">{r.rating.score.toFixed(1)}</p>

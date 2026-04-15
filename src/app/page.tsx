@@ -14,32 +14,32 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Hero */}
+      {/* Hero — warm sand/sunset at top */}
       <section className="sand-texture py-16 sm:py-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <Logo size={80} className="mx-auto mb-6" />
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-charcoal leading-tight">
+          <Logo size={80} className="mx-auto mb-6 drop-shadow-lg" />
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-charcoal leading-tight drop-shadow-sm">
             Outlining{" "}
             <span className="text-sunset italic">Chesney</span>
           </h1>
-          <p className="mt-4 text-lg sm:text-xl text-charcoal-light max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-lg sm:text-xl text-charcoal/80 max-w-2xl mx-auto leading-relaxed">
             Kenny Chesney songs are so formulaic you can reduce them to
             bullet-point outlines and they still make perfect sense.
             We have the outlines to prove it.
           </p>
-          <p className="mt-3 text-sm text-charcoal-light/60 italic font-mono">
+          <p className="mt-3 text-sm text-charcoal/50 italic font-mono">
             I. Beach. II. Beer. III. Repeat.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               href="/browse"
-              className="inline-flex items-center gap-2 bg-sunset hover:bg-sunset-dark text-white font-semibold px-6 py-3 rounded-full transition-colors shadow-lg shadow-sunset/20"
+              className="inline-flex items-center gap-2 bg-sunset hover:bg-sunset-dark text-white font-semibold px-6 py-3 rounded-full transition-colors shadow-lg shadow-sunset/30"
             >
               Browse Outlines
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 bg-white hover:bg-sand-light text-charcoal font-semibold px-6 py-3 rounded-full transition-colors border border-sunset/20"
+              className="inline-flex items-center gap-2 bg-white/80 hover:bg-white text-charcoal font-semibold px-6 py-3 rounded-full transition-colors border border-white/50 shadow-md"
             >
               The Origin Story
             </Link>
@@ -47,25 +47,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section className="border-y border-sunset/10 bg-white/50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-sunset">{outlines.length}</p>
-              <p className="text-xs text-charcoal-light mt-1">Outlines</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-ocean">{artists.length}</p>
-              <p className="text-xs text-charcoal-light mt-1">Artists</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-sunset">{chesneyPercent}%</p>
-              <p className="text-xs text-charcoal-light mt-1">Chesney</p>
-            </div>
-            <div>
-              <p className="text-2xl sm:text-3xl font-bold text-ocean">{founders.length}</p>
-              <p className="text-xs text-charcoal-light mt-1">Founding Members</p>
+      {/* Wave transition from sand to water */}
+      <div className="wave-divider" />
+
+      {/* Quick Stats — floating card on the water */}
+      <section className="relative -mt-5 z-10">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg shadow-ocean/10 border border-white/60 px-6 py-5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-sunset">{outlines.length}</p>
+                <p className="text-xs text-charcoal-light mt-1">Outlines</p>
+              </div>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-ocean">{artists.length}</p>
+                <p className="text-xs text-charcoal-light mt-1">Artists</p>
+              </div>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-sunset">{chesneyPercent}%</p>
+                <p className="text-xs text-charcoal-light mt-1">Chesney</p>
+              </div>
+              <div>
+                <p className="text-2xl sm:text-3xl font-bold text-ocean">{founders.length}</p>
+                <p className="text-xs text-charcoal-light mt-1">Founding Members</p>
+              </div>
             </div>
           </div>
         </div>
@@ -92,9 +97,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Origin Story Teaser */}
-      <section className="bg-white/50 border-y border-sunset/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+      {/* Origin Story Teaser — white card floating on water */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="bg-white/85 backdrop-blur-sm rounded-2xl shadow-lg shadow-ocean/10 border border-white/60 px-6 sm:px-10 py-10 text-center">
           <h2 className="text-2xl font-display font-bold text-charcoal mb-4">How It Started</h2>
           <p className="text-charcoal-light leading-relaxed max-w-2xl mx-auto">
             In July 2010, a group of friends started emailing each other &ldquo;outlines&rdquo;
@@ -126,9 +131,9 @@ export default function HomePage() {
         {songSuggestions.map((suggestion) => (
           <div
             key={suggestion.songTitle}
-            className="bg-white rounded-xl border border-ocean/20 p-5 flex items-start gap-4"
+            className="bg-white/90 backdrop-blur-sm rounded-xl border border-white/60 shadow-md p-5 flex items-start gap-4"
           >
-            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ocean/10 flex items-center justify-center">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-ocean/15 flex items-center justify-center">
               <span className="text-ocean font-bold text-lg">#1</span>
             </div>
             <div>

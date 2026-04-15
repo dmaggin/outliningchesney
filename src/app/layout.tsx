@@ -30,7 +30,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className="min-h-full flex flex-col bg-cream text-charcoal">
+      <body className="min-h-full flex flex-col bg-sky text-charcoal">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

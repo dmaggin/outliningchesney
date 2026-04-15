@@ -17,7 +17,7 @@ function OutlineNodeComponent({ node, depth = 0 }: { node: OutlineNode; depth?: 
 
 export function OutlineRenderer({ content }: { content: OutlineNode[] }) {
   return (
-    <div className="outline-content bg-white rounded-xl border border-sunset/10 p-5 sm:p-8 shadow-sm">
+    <div className="outline-content bg-white/90 backdrop-blur-sm rounded-xl border border-white/60 p-5 sm:p-8 shadow-lg shadow-ocean/10">
       {content.map((node, i) => (
         <OutlineNodeComponent key={i} node={node} />
       ))}

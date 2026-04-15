@@ -6,14 +6,17 @@
   --color-sunset-dark: #E85D2A;
   --color-ocean: #00B4D8;
   --color-ocean-dark: #0096B7;
+  --color-ocean-light: #7DD3E8;
   --color-sand: #FFD166;
-  --color-sand-light: #FFF8F0;
+  --color-sand-light: #FFF3D6;
   --color-charcoal: #2D3748;
   --color-charcoal-light: #4A5568;
-  --color-cream: #FFFDF7;
+  --color-cream: #FFF9EE;
   --color-coral: #FF8C69;
   --color-lime: #A8E06C;
   --color-pink: #FF6B9D;
+  --color-sky: #E0F4FD;
+  --color-seafoam: #B2F0E8;
 
   --font-sans: 'Outfit', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -21,7 +24,7 @@
 }
 
 :root {
-  --background: #FFFDF7;
+  --background: #E0F4FD;
   --foreground: #2D3748;
 }
 
@@ -29,6 +32,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  position: relative;
+}
+
+/* Ocean water background — layered across entire page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    /* Soft caustic light ripples */
+    radial-gradient(ellipse 600px 200px at 10% 30%, rgba(178, 240, 232, 0.5) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 250px at 85% 60%, rgba(0, 180, 216, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 800px 300px at 50% 90%, rgba(178, 240, 232, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 200px at 30% 70%, rgba(125, 211, 232, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 200px at 70% 20%, rgba(255, 209, 102, 0.1) 0%, transparent 60%),
+    /* Base gradient — shallow tropical water */
+    linear-gradient(
+      180deg,
+      #E0F4FD 0%,
+      #D0EFFA 15%,
+      #C4EBF8 30%,
+      #D6F1FB 50%,
+      #E0F4FD 70%,
+      #D0EFFA 100%
+    );
+}
+
+/* Animated subtle wave overlay */
+@keyframes wave-drift {
+  0% { background-position: 0% 50%, 100% 50%; }
+  50% { background-position: 100% 50%, 0% 50%; }
+  100% { background-position: 0% 50%, 100% 50%; }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.3;
+  background:
+    repeating-linear-gradient(
+      100deg,
+      transparent,
+      transparent 40px,
+      rgba(255, 255, 255, 0.3) 40px,
+      rgba(255, 255, 255, 0.3) 42px,
+      transparent 42px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      80deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.2) 60px,
+      rgba(255, 255, 255, 0.2) 62px,
+      transparent 62px,
+      transparent 120px
+    );
+  animation: wave-drift 30s ease-in-out infinite;
 }
 
 /* Outline content styling — monospace for that academic humor */
@@ -72,12 +136,20 @@ body {
   height: 4px;
 }
 
-/* Subtle sand texture on hero */
+/* Hero section — bright sky-to-water gradient with sand */
 .sand-texture {
-  background-image:
-    radial-gradient(circle at 20% 80%, rgba(255, 209, 102, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 180, 216, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.05) 0%, transparent 70%);
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 120%, rgba(255, 209, 102, 0.4) 0%, transparent 70%),
+    radial-gradient(circle at 20% 80%, rgba(255, 140, 105, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 50%),
+    linear-gradient(
+      180deg,
+      #FFF3D6 0%,
+      #FFE8B8 20%,
+      #FFD166 50%,
+      #FFBB44 70%,
+      #FF8C69 100%
+    );
 }
 
 /* Gradient for hero */
@@ -133,5 +205,23 @@ body {
 
 .outline-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(255, 107, 53, 0.15), 0 4px 10px -5px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px -5px rgba(0, 180, 216, 0.2), 0 4px 10px -5px rgba(0, 0, 0, 0.08);
+}
+
+/* Decorative wave divider */
+.wave-divider {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+}
+
+.wave-divider::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -5%;
+  width: 110%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0,20 C200,35 400,5 600,20 C800,35 1000,5 1200,20 L1200,40 L0,40 Z' fill='%23E0F4FD'/%3E%3C/svg%3E") repeat-x;
+  background-size: 1200px 40px;
 }

@@ -9,7 +9,7 @@ export function OutlineCard({ outline }: { outline: Outline }) {
 
   return (
     <Link href={`/outline/${outline.slug}`} className="block outline-card">
-      <article className="bg-white rounded-xl border border-sunset/10 p-5 h-full flex flex-col">
+      <article className="bg-white/90 backdrop-blur-sm rounded-xl border border-white/60 shadow-md p-5 h-full flex flex-col">
         <div className="flex items-start justify-between gap-2 mb-3">
           <div className="min-w-0">
             <h3 className="font-semibold text-charcoal text-lg leading-tight truncate">

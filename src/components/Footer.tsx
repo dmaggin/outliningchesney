@@ -29,7 +29,7 @@ export function Footer() {
             <p className="text-sm text-charcoal-light italic leading-relaxed">
               &ldquo;Nothing works quite like a Chesney song (or runs like a Deere)&rdquo;
             </p>
-            <p className="text-xs text-charcoal-light/60 mt-1">— Matt Malament, July 2010</p>
+            <p className="text-xs text-charcoal-light/60 mt-1">— MJM, July 2010</p>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-sunset/10 text-center">

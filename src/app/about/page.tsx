@@ -23,8 +23,7 @@ export default function AboutPage() {
       <section className="prose prose-charcoal max-w-none mb-12">
         <div className="space-y-6 text-charcoal-light leading-relaxed">
           <p>
-            In <strong className="text-charcoal">July 2010</strong>, a group of friends &mdash; Dan Maggin,
-            Matt Malament, Ben Maggin, Edward Silva, and Todd Hutner &mdash; started emailing
+            In <strong className="text-charcoal">July 2010</strong>, a group of friends started emailing
             each other &ldquo;outlines&rdquo; of Kenny Chesney songs.
           </p>
           <p>

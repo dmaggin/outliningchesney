@@ -2,7 +2,7 @@
 
 Kenny Chesney songs are so formulaic you can reduce them to bullet-point outlines and they still make perfect sense. We have the outlines to prove it.
 
-> "Nothing works quite like a Chesney song (or runs like a Deere)" — Matt Malament, July 2010
+> "Nothing works quite like a Chesney song (or runs like a Deere)" — MJM, July 2010
 
 Born from a 2010 email thread between friends. Launched as a website in 2026. Only took 16 years.
 

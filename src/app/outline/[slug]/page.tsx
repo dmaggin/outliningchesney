@@ -6,9 +6,9 @@ import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { FeedbackForm } from "@/components/FeedbackForm";
 import { ListeviousRatingCard } from "@/components/ListeviousRating";
 import { StrawHat } from "@/components/StrawHat";
+import { LiveComments } from "@/components/LiveComments";
 import { outlines, getOutlineBySlug, getOutlineStats, getListeviousRating } from "@/data/outlines";
 import { getFounder } from "@/data/founders";
-import { comments } from "@/data/comments";
 
 export function generateStaticParams() {
   return outlines.map((o) => ({ slug: o.slug }));
@@ -151,41 +151,10 @@ export default async function OutlinePage({
         </div>
       )}
 
-      {/* Comments Thread */}
-      {(() => {
-        const songComments = comments.filter((c) => c.outlineSlug === outline.slug);
-        if (songComments.length === 0) return null;
-        return (
-          <div className="mt-10">
-            <h3 className="font-semibold text-charcoal mb-4">
-              Comments ({songComments.length})
-            </h3>
-            <div className="space-y-3">
-              {songComments.map((c) => (
-                <div
-                  key={c.id}
-                  className="bg-white/80 backdrop-blur-sm rounded-xl border border-white/60 shadow-sm p-4"
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-charcoal">{c.author}</span>
-                      {c.type === "edit-suggestion" && (
-                        <span className="text-[0.55rem] font-semibold text-ocean-deep bg-ocean/10 px-1.5 py-0.5 rounded-full uppercase tracking-wide">
-                          Edit Suggestion
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-xs text-charcoal-light/50">{c.date}</span>
-                  </div>
-                  <p className="text-sm text-charcoal-light leading-relaxed whitespace-pre-wrap">
-                    {c.content}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })()}
+      {/* Comments Thread — live from Netlify Forms */}
+      <div className="mt-10">
+        <LiveComments outlineSlug={outline.slug} />
+      </div>
 
       {/* Feedback Form */}
       <div className="mt-10">
